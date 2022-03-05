@@ -1,0 +1,26 @@
+@import '../../assets/styles/colors.scss';
+@import '../../assets/styles/mixins.scss';
+
+// TODO: create mixin files
+@mixin reset-native-button {
+    border: none;
+    outline: none;
+}
+@mixin bg-ease-transition {
+    transition: background-color 0.3s ease;
+}
+
+.btn-main {
+    @include reset-native-button;
+    @include bg-ease-transition;
+    background-color: $blue;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+    color: $white;
+    cursor: pointer;
+    &:hover  {
+        background-color: darken($blue, 10%);
+    }
+}

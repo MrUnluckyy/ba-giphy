@@ -1,0 +1,14 @@
+@import './assets/styles/colors.scss';
+@import './assets/styles/typography.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $dark-gray;
+  font-family: $font-stack-main;
+  color: $white;
+}
