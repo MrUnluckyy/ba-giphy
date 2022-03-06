@@ -8,7 +8,14 @@
     height: 260px;
     margin: 10px;
     cursor: pointer;
-    background: $light-gray;
+    background: $black;
+    overflow: hidden;
+    .gif-image {
+        max-width: 100%;
+    }
+    .footer-locked {
+        display: none;
+    }
     .footer {
         padding: 16px;
         position: absolute;
@@ -19,15 +26,30 @@
         right: 0;
         bottom: 0;
         font-size: 12px;
-        .lock-icon {
-            height: 18px;
-        }
     }
-    &:hover {
+    &:hover{
         border: 4px solid $blue;
         .footer {
             display: flex;
         }
+        .footer-locked {
+            display: none;
+        }
     }
+
+    &.selected {
+        .footer-locked {
+            padding: 16px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            color: $white;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: 12px;
+        }
+    }
+
 
 }
