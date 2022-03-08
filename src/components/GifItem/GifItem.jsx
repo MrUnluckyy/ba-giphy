@@ -7,14 +7,19 @@ import { ReactComponent as Unlock } from '../../assets/icons/unlock.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectGif, unselectGif } from '../../redux/selectedGifs'
 
-const GifItem = (gif, index) => {
+
+
+const GifItem = ({ gif }) => {
     const [isSelected, setIsSelected] = useState(false)
+    const { selectedGifs } = useSelector(state => state)
+    console.log(gif);
 
     useEffect(() => {
-      if(!!gifs.find(item => item.image.id === gif.id)) setIsSelected(true)
+        console.log('selected', selectedGifs);
+        console.log('gif', gif);
+        if(!!selectedGifs.find(item => item.id === gif.id)) setIsSelected(true)
     }, [])
 
-    const gifs = useSelector(state => state.selectedGifs)
     const dispatch = useDispatch()
 
     const handleGifSelection= () => {
@@ -23,7 +28,7 @@ const GifItem = (gif, index) => {
     }
   return (
     <div className={`gif-item ${isSelected ? 'selected' : ''}`}  onClick={() => handleGifSelection()}>
-        <img src={gif.image.images.original.url} alt="test" className='gif-image'/>
+        <img src={gif.images.original.url} alt="test" className='gif-image'/>
         <div className='footer-locked'>
             <Lock className='lock-icon' />
         </div>

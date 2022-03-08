@@ -18,6 +18,7 @@ export const  gifsApi = createApi({
         getTrendingGifs: builder.query({
             query: () => createRequest('/trending')
         }),
+        // return only one gif
         getRandomGifs: builder.query({
             query: () => createRequest('/random')
         })
