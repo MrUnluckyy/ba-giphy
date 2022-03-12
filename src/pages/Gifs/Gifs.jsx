@@ -1,92 +1,94 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import GifItem from '../../components/GifItem/GifItem'
+import HorizontalBlocksLoader from '../../components/Global/HorizontalBlocksLoader/HorizontalBlocksLoader'
 
-// import { useGetTrendingGifsQuery, useGetRandomGifsQuery } from '../../api/gifs'
 import { useSelector, useDispatch } from 'react-redux'
 
 import './gifs.scss'
-import Button from '../../components/Button/Button'
-import axios from 'axios'
+import { getRandomGif } from '../../api/getGifs'
+
+import { getIsReloadingGifs } from '../../redux/gifs'
+
 
 const Gifs = () => {
 
-  const [gifs, setGifs] = useState([])
+  const [gifsData, setGifsData] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const dispatch = useDispatch()
   const { selectedGifs } = useSelector(state => state)
-  
+
+  useEffect(() => {
+    document.addEventListener('keydown', spacebarHandler, false);
+    return () => {
+      document.removeEventListener('keydown', spacebarHandler, false);
+    };
+  })
   
   useEffect(() => {
-
-    let i = 0
-    let init = []
-
-    const getRandomGifts = () => {
-      axios.get('https://api.giphy.com/v1/gifs/random', {
-        params: {
-          api_key: 'BaC7RwDgyCEimoFGdOcEWLHA0uugOLwU',
-        }
-      }).then(resp => {
-        if(!init.find(item => item.id === resp.data.data.id)) {
-          init.push(resp.data.data)
-          i++
-        }
-        if(i < 12) { 
-          getRandomGifts()
-        } else if (i === 12 ) {
-          init.sort((a, b) => {
-            return new Date(b.import_datetime) - new Date(a.import_datetime)
-          })
-          setGifs([...init])
-          setLoading(false)
-        }
-      }).catch(err => {
-        console.log(err);
+    const loadGifs = () => {
+      // TODO: Add a check to see if there are any repetitive gifs
+      let data = []
+      for(let i = 0; i < 12; i++) {
+        data.push(getRandomGif())
+      }
+  
+      Promise.all(data.map((item) => {
+        return item
+      })).then((data) => {
+        setGifsData([...data])
+        setLoading(false)
       })
     }
 
-    getRandomGifts();
+    loadGifs()
   },[])
+
+  // TODO: Add useEffect to watch state change so it can shuffle items
+
+  const spacebarHandler = useCallback((event) => {
+    if(event.keyCode === 32) {
+      event.preventDefault()
+      handleClick()
+    }
+  });
 
   const checkIfIdInArray = (array, element) => {
     return !!array.find(item => item.id === element.id)
   }
 
-  const generateGifs = async() => {
-
-    let response = await fetch('https://api.giphy.com/v1/gifs/random?api_key=BaC7RwDgyCEimoFGdOcEWLHA0uugOLwU')
-    let json = await response.json()
-    return json.data
-  }
-
   const handleClick = () => {
-    let test = []
+    if(selectedGifs.length === 12) return;
+    dispatch(getIsReloadingGifs(true))
 
-    gifs.forEach(gif => {
+    let data = []
+    gifsData.forEach(gif => {
       if(!checkIfIdInArray(selectedGifs, gif)) {
-        test.push(generateGifs())
+        data.push(getRandomGif())
       } else {
-        test.push(gif)
+        data.push(gif)
       }
     });
-    Promise.all(test.map((item) => {
+    Promise.all(data.map((item) => {
       return item.data ? item.data : item
     })).then((res) => {
-      setGifs([...res])
+      setGifsData([...res])
+      dispatch(getIsReloadingGifs(false))
     })
   }
 
   return (
     <div>
-      <Button onClick={() => handleClick()}>Test</Button>
-      <div className='gifs'>
+      <div className={`gifs ${loading ? 'loading' : ''}`}>
         {
-          loading ?
-          <h1>loading...</h1>
+          loading
+          ?
+            <HorizontalBlocksLoader />
           :
-          gifs.map(gif => {
-            return <GifItem key={gif.id} gif={gif} />
-          })
+            gifsData.map(gif => {
+              return <GifItem key={gif.id} gif={gif} />
+            })
         }
       </div>
     </div>
