@@ -27,14 +27,19 @@
         bottom: 0;
         font-size: 12px;
     }
-    &:hover{
-        border: 4px solid $blue;
-        .footer {
-            display: flex;
+    &:hover {
+        &:not(.disable) {
+            border: 4px solid $blue;
+            .footer {
+                display: flex;
+            }
+            .footer-locked {
+                display: none;
+            }
         }
-        .footer-locked {
-            display: none;
-        }
+    }
+    &.disable {
+        cursor: default;
     }
 
     &.selected {
@@ -50,6 +55,5 @@
             font-size: 12px;
         }
     }
-
 
 }

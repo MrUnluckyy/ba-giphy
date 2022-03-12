@@ -1,0 +1,48 @@
+@import '../../../assets/styles/mixins.scss';
+@import '../../../assets/styles/colors.scss';
+
+.loader-block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $black;
+    @include center-flex;
+    @keyframes pulse {
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    .ctnr {
+        display: flex;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $blue;
+    }
+
+    .ldr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        margin: auto;
+        width: 2.5em;
+        height: 2.5em;
+    }
+    
+    .ldr-blk {
+        height: 35%;
+        width: 35%;
+        animation: pulse 0.75s ease-in infinite alternate;
+        background-color: darken($blue, 15%);
+    }
+    
+    .an_delay {
+        animation-delay: 0.75s;
+    }
+}

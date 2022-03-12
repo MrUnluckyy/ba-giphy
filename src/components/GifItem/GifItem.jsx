@@ -4,30 +4,34 @@ import './gif-item.scss'
 
 import { ReactComponent as Lock } from '../../assets/icons/lock.svg'
 import { ReactComponent as Unlock } from '../../assets/icons/unlock.svg'
+import BlocksLoader from '../Global/BlocksLoader/BlocksLoader'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { selectGif, unselectGif } from '../../redux/selectedGifs'
-
 
 
 const GifItem = ({ gif }) => {
     const [isSelected, setIsSelected] = useState(false)
     const { selectedGifs } = useSelector(state => state)
-    console.log(gif);
+    const { isReloadingGifs } = useSelector(state => state.gifs)
 
     useEffect(() => {
-        console.log('selected', selectedGifs);
-        console.log('gif', gif);
         if(!!selectedGifs.find(item => item.id === gif.id)) setIsSelected(true)
     }, [])
 
     const dispatch = useDispatch()
 
     const handleGifSelection= () => {
+        if(isReloadingGifs) return
+
         isSelected ? dispatch(unselectGif(gif)) : dispatch(selectGif(gif))
         setIsSelected(!isSelected)
     }
   return (
-    <div className={`gif-item ${isSelected ? 'selected' : ''}`}  onClick={() => handleGifSelection()}>
+    <div className={`gif-item ${isSelected && 'selected'} ${isReloadingGifs && 'disable'}`}  onClick={() => handleGifSelection()}>
+        {
+            isReloadingGifs && !isSelected ? <BlocksLoader /> : ''
+        }
         <img src={gif.images.original.url} alt="test" className='gif-image'/>
         <div className='footer-locked'>
             <Lock className='lock-icon' />
