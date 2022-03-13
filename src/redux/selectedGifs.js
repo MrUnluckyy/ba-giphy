@@ -15,5 +15,5 @@ export const selectedGifsSlice = createSlice({
     }
 })
 
-export const { selectGif, unselectGif } = selectedGifsSlice.actions
+export const { selectGif, unselectGif, setGifsFromLocalStorage } = selectedGifsSlice.actions
 export default selectedGifsSlice.reducer

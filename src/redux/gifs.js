@@ -9,9 +9,12 @@ export const gifsSlice = createSlice({
     reducers: {
         getIsReloadingGifs(state, action) {
             state.isReloadingGifs = action.payload
+        },
+        setGifs(state, action) {
+            state.gifs = action.payload
         }
     }
 })
 
-export const { getIsReloadingGifs } = gifsSlice.actions
+export const { getIsReloadingGifs, setGifs } = gifsSlice.actions
 export default gifsSlice.reducer

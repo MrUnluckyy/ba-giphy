@@ -11,4 +11,17 @@ body {
   background-color: $dark-gray;
   font-family: $font-stack-main;
   color: $white;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+   
+  &::-webkit-scrollbar-track {
+    background: $dark-gray;
+  }
+   
+  &::-webkit-scrollbar-thumb {
+    background: $light-gray;
+
+  }
 }
