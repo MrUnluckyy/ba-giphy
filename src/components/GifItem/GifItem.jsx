@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectGif, unselectGif } from '../../redux/selectedGifs'
 
 
-const GifItem = ({ gif }) => {
+const GifItem = ({ gif, index }) => {
     const [isSelected, setIsSelected] = useState(false)
     const { selectedGifs } = useSelector(state => state)
     const { isReloadingGifs } = useSelector(state => state.gifs)
@@ -24,7 +24,7 @@ const GifItem = ({ gif }) => {
     const handleGifSelection= () => {
         if(isReloadingGifs) return
 
-        isSelected ? dispatch(unselectGif(gif)) : dispatch(selectGif(gif))
+        isSelected ? dispatch(unselectGif(gif)) : dispatch(selectGif({...gif, index}))
         setIsSelected(!isSelected)
     }
   return (

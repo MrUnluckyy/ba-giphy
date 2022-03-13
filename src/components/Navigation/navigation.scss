@@ -11,17 +11,23 @@
     .action-container {
         @include center-flex;
         font-size: 12px;
-        .info-icon {
-            width: 18px;
-            margin: 0 3px;
-        }
-        .info-text {
-            display: inline-block;
-            margin: 0 6px;
-            strong {
-                font-weight: 500;
-                text-decoration: underline;
-                color: $white;
+        .info-container {
+            @include center-flex;
+            .info-icon {
+                width: 18px;
+                margin: 0 3px;
+            }
+            .info-text {
+                display: inline-block;
+                margin: 0 6px;
+                strong {
+                    font-weight: 500;
+                    text-decoration: underline;
+                    color: $white;
+                }
+            }
+            @media (max-width: 1200px) {
+                display: none;
             }
         }
     }
