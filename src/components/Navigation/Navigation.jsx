@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Button from '../Button/Button'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg'
