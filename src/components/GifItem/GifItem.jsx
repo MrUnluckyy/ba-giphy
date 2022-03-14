@@ -16,41 +16,41 @@ const GifItem = ({ gif, index }) => {
     const { isReloadingGifs } = useSelector(state => state.gifs)
 
     useEffect(() => {
-        if(!!selectedGifs.find(item => item.id === gif.id)) setIsSelected(true)
+        if (!!selectedGifs.find(item => item.id === gif.id)) setIsSelected(true)
     }, [])
 
     const dispatch = useDispatch()
 
-    const handleGifSelection= () => {
-        if(isReloadingGifs) return
+    const handleGifSelection = () => {
+        if (isReloadingGifs) return
 
-        isSelected ? dispatch(unselectGif(gif)) : dispatch(selectGif({...gif, index}))
+        isSelected ? dispatch(unselectGif(gif)) : dispatch(selectGif({ ...gif, index }))
         setIsSelected(!isSelected)
     }
-  return (
-    <div className={`gif-item ${isSelected && 'selected'} ${isReloadingGifs && 'disable'}`}  onClick={() => handleGifSelection()}>
-        {
-            isReloadingGifs && !isSelected ? <BlocksLoader /> : ''
-        }
-        <img src={gif.images.original.url} alt="test" className='gif-image'/>
-        <div className='footer-locked'>
-            <Lock className='lock-icon' />
-        </div>
-        <div className="footer">
+    return (
+        <div className={`gif-item ${isSelected && 'selected'} ${isReloadingGifs && 'disable'}`} onClick={() => handleGifSelection()}>
             {
-                isSelected 
-                ?
-                <>
-                    <Unlock className='lock-icon' /> Click to unlock
-                </>
-                :
-                <>
-                    <Lock className='lock-icon' /> Click to lock
-                </>
+                isReloadingGifs && !isSelected ? <BlocksLoader /> : ''
             }
+            <img src={gif.images.original.url} alt="test" className='gif-image' />
+            <div className='footer-locked'>
+                <Lock className='lock-icon' />
+            </div>
+            <div className="footer">
+                {
+                    isSelected
+                        ?
+                        <>
+                            <Unlock className='lock-icon' /> Click to unlock
+                        </>
+                        :
+                        <>
+                            <Lock className='lock-icon' /> Click to lock
+                        </>
+                }
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default GifItem

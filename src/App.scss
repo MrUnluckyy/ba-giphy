@@ -1,5 +1,5 @@
-@import './assets/styles/colors.scss';
-@import './assets/styles/typography.scss';
+@import "./assets/styles/colors.scss";
+@import "./assets/styles/typography.scss";
 
 * {
   box-sizing: border-box;
@@ -15,13 +15,12 @@ body {
   &::-webkit-scrollbar {
     width: 8px;
   }
-   
+
   &::-webkit-scrollbar-track {
     background: $dark-gray;
   }
-   
+
   &::-webkit-scrollbar-thumb {
     background: $light-gray;
-
   }
 }

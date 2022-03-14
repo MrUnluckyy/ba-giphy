@@ -9,16 +9,16 @@ import './navigation.scss'
 const Navigation = ({ onButtonClick }) => {
   return (
     <nav className='navigation'>
-        <Logo />
-        <div className='action-container'>
-          <div className='info-container'>
-            <Info className='info-icon' />
-            <span className='info-text'>
-                Press <strong>spacebar</strong> to shuffle or
-            </span>
-          </div>
-          <Button onClick={onButtonClick}>Click here</Button>
+      <Logo />
+      <div className='action-container'>
+        <div className='info-container'>
+          <Info className='info-icon' />
+          <span className='info-text'>
+            Press <strong>spacebar</strong> to shuffle or
+          </span>
         </div>
+        <Button onClick={onButtonClick}>Click here</Button>
+      </div>
     </nav>
   )
 }

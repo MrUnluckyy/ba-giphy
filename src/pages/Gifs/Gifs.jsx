@@ -11,10 +11,7 @@ const Gifs = ({ loading }) => {
     <div>
       <div className={`gifs ${loading ? 'loading' : ''}`}>
         {
-          loading
-          ?
-            <HorizontalBlocksLoader />
-          :
+          loading ? <HorizontalBlocksLoader /> :
             gifs.map((gif, index) => {
               return <GifItem key={`${gif.id}-${index}`} gif={gif} index={index} />
             })

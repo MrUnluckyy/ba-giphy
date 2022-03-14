@@ -1,5 +1,5 @@
-@import '../../assets/styles/colors.scss';
-@import '../../assets/styles/mixins.scss';
+@import "../../assets/styles/colors.scss";
+@import "../../assets/styles/mixins.scss";
 
 .btn-main {
     @include reset-native-button;
@@ -11,7 +11,7 @@
     border-radius: 4px;
     color: $white;
     cursor: pointer;
-    &:hover  {
+    &:hover {
         background-color: darken($blue, 10%);
     }
 }

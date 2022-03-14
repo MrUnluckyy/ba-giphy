@@ -1,5 +1,5 @@
-@import '../../assets/styles/mixins.scss';
-@import '../../assets/styles/colors.scss';
+@import "../../assets/styles/mixins.scss";
+@import "../../assets/styles/colors.scss";
 
 .gif-item {
     @include center-flex;
@@ -55,5 +55,4 @@
             font-size: 12px;
         }
     }
-
 }

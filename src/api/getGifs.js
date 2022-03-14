@@ -8,6 +8,6 @@ export const getRandomGif = async () => {
     }).then(resp => {
         return resp.data.data
     }).catch(err => {
-        alert(err);
+        alert(err)
     })
 }

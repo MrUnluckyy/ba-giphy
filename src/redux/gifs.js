@@ -1,5 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { getRandomGifts } from '../api/getGifs';
+import { createSlice } from "@reduxjs/toolkit"
 
 export const gifsSlice = createSlice({
     name: "gifs",
