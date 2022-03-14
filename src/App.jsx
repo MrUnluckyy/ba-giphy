@@ -57,7 +57,7 @@ function App() {
       event.preventDefault()
       shuffleGifs()
     }
-  })
+  }, [])
 
   const checkIfIdInArray = (array, element) => {
     return !!array.find(item => item.id === element.id)
